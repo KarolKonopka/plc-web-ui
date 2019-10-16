@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ui/style.css' %}">
+<span class="header">Web UI</span><span class="header-author"> - author: <b>Karol Konopka</b></span><br>
+{% for plc in plc_list %}
+	Name:<span class="name">{{ plc.name }}</span> Ip:<span class="ip">{{ plc.ip }}</span><br>
+	{% if plc.coils_list %}
+		<span class="row">Coils <span class="variable">%Q</span> [{{ plc.first_coil }}:{{ plc.coils_list|length|add:-1|add:plc.first_coil }}]: 
+		{% for coil in plc.coils_list %}
+			{% if coil %}
+				<span class="on">O</span>{% else %}<span class="off">X</span>{% endif %}<sub>{{ plc.first_coil|add:forloop.counter0 }}</sub>
+		{% endfor %}
+		</span><br>
+	{% endif %}
+	{% if plc.discrete_inputs_list %}
+		<span class="row">Discrete inputs <span class="variable">%I</span> [{{ plc.first_discrete_input }}:{{ plc.discrete_inputs_list|length|add:-1|add:plc.first_discrete_input }}]:
+		{% for discrete_input in plc.discrete_inputs_list %}
+			{% if discrete_input %}<span class="on">O</span>{% else %}<span class="off">X</span>{% endif %}<sub>{{ plc.first_discrete_input|add:forloop.counter0 }}</sub>
+		{% endfor %}
+		</span><br>
+	{% endif %}
+	{% if plc.holding_registers_list %}
+		<span class="row">Holding registers <span class="variable">%AQ</span> [{{ plc.first_holding_register }}:{{ plc.holding_registers_list|length|add:-1|add:plc.first_holding_register }}]:
+		{% for holding_register in plc.holding_registers_list %}
+			<span class="register">{{ holding_register }}</span><sub>{{ plc.first_holding_register|add:forloop.counter0 }}</sub>
+		{% endfor %}
+		</span><br>
+	{% endif %}
+	{% if plc.input_registers_list %}
+		<span class="row">Input registers <span class="variable">%IQ</span> [{{ plc.first_input_register }}:{{ plc.input_registers_list|length|add:-1|add:plc.first_input_register }}]:
+		{% for input_register in plc.input_registers_list %}
+			<span class="register">{{ input_register }}</span><sub>{{ plc.first_input_register|add:forloop.counter0 }}</sub>
+		{% endfor %}
+		</span><br>
+	{% endif %}
+{% endfor %}

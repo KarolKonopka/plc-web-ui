@@ -1,0 +1,35 @@
+.header {
+	font-weight: bold;
+	font-size: 2em;
+}
+.header-author {
+	font-weight: normal;
+	font-size: 1.5em;
+}
+.on {
+	font-weight: bold;
+	text-shadow: 0 0 4px green;
+}
+.off {
+	font-weight: bold;
+	text-shadow: 0 0 4px red;
+}
+.register {
+	font-weight: bold;
+	text-shadow: 0 0 4px aqua;
+}
+.variable {
+	font-weight: bold;
+}
+.name {
+	font-weight: bold;
+	text-shadow: 0 0 4px gold;
+	font-size: 1.7em;
+}
+.ip {
+	font-weight: bold;
+	font-size: 1.3em;
+}
+.row {
+	margin-left: 2em
+}
