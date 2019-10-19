@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'ui/style.css' %}">
+<a href="/"><span class="header">Web UI</span></a><span class="header-author"> - author: <b>Karol Konopka</b></span><br>
+Name: <span class="name">{{ name }}</span> ip: <span class="{% if connected %}ip-online{% else %}ip-offline{% endif %}">{{ ip }}</span><br>
+{% if coils_list %}
+	<span class="row">Coils <span class="variable">%Q</span> [{{ first_coil }}:{{ coils_list|length|add:-1|add:first_coil }}]: 
+	<form id="edit-coil" action="/plc/{{ id }}/" method="post">{% csrf_token %}
+	<input type="hidden" id="coil" name="coil"> 
+	{% for coil in coils_list %}
+		<a href="#" class="coil-edit" onclick="document.forms['edit-coil'].elements.coil.value={{ first_coil|add:forloop.counter0 }};document.forms['edit-coil'].submit();">
+		{% if coil %}<span class="on-edit">1</span>{% else %}<span class="off-edit">0</span>{% endif %}</a><sub>{{ first_coil|add:forloop.counter0 }}</sub>
+	{% endfor %}
+	</form>
+	</span><br>
+{% endif %}
+	{% if discrete_inputs_list %}
+	<span class="row">Discrete inputs <span class="variable">%I</span> [{{ first_discrete_input }}:{{ discrete_inputs_list|length|add:-1|add:first_discrete_input }}]:
+	{% for discrete_input in discrete_inputs_list %}
+		{% if discrete_input %}<span class="on">1</span>{% else %}<span class="off">0</span>{% endif %}<sub>{{ first_discrete_input|add:forloop.counter0 }}</sub>
+	{% endfor %}
+	</span><br>
+{% endif %}
+{% if holding_registers_list %}
+		<span class="row">Holding registers <span class="variable">%AQ</span> [{{ first_holding_register }}:{{holding_registers_list|length|add:-1|add:first_holding_register }}]:
+	{% for holding_register in holding_registers_list %}
+			<span class="register">{{ holding_register }}</span><sub>{{ first_holding_register|add:forloop.counter0 }}</sub>
+	{% endfor %}
+	</span><br>
+{% endif %}
+{% if input_registers_list %}
+	<span class="row">Input registers <span class="variable">%IQ</span> [{{ first_input_register }}:{{ input_registers_list|length|add:-1|add:first_input_register }}]:
+	{% for input_register in input_registers_list %}
+		<span class="register">{{ input_register }}</span><sub>{{ first_input_register|add:forloop.counter0 }}</sub>
+	{% endfor %}
+	</span><br>
+{% endif %}

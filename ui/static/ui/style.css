@@ -6,11 +6,11 @@
 	font-weight: normal;
 	font-size: 1.5em;
 }
-.on {
+.on, .on-edit {
 	font-weight: bold;
 	text-shadow: 0 0 4px green;
 }
-.off {
+.off, .off-edit {
 	font-weight: bold;
 	text-shadow: 0 0 4px red;
 }
@@ -26,10 +26,28 @@
 	text-shadow: 0 0 4px gold;
 	font-size: 1.7em;
 }
-.ip {
+.ip-online {
 	font-weight: bold;
 	font-size: 1.3em;
+	text-shadow: 0 0 4px green;
+}
+.ip-offline {
+	font-weight: bold;
+	font-size: 1.3em;
+	text-shadow: 0 0 4px red;
 }
 .row {
 	margin-left: 2em
+}
+.on-edit:hover {
+	text-shadow: 0 0 4px red;
+}
+.off-edit:hover {
+	text-shadow: 0 0 4px green;
+}
+.coil-edit, a {
+	color: black;
+}
+#edit-coil {
+	display: inline;
 }

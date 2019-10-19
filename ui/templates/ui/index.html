@@ -1,20 +1,20 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'ui/style.css' %}">
-<span class="header">Web UI</span><span class="header-author"> - author: <b>Karol Konopka</b></span><br>
+<a href="/"><span class="header">Web UI</span></a><span class="header-author"> - author: <b>Karol Konopka</b></span> <a href="/admin/">[Admin]</a><br>
 {% for plc in plc_list %}
-	Name:<span class="name">{{ plc.name }}</span> Ip:<span class="ip">{{ plc.ip }}</span><br>
+	Name: <span class="name">{{ plc.name }}</span> ip: <span class="{% if plc.connected %}ip-online{% else %}ip-offline{% endif %}">{{ plc.ip }}</span>{% if plc.connected %} <a href="/plc/{{plc.id}}/">[Edit]</a>{% endif %}<br>
 	{% if plc.coils_list %}
 		<span class="row">Coils <span class="variable">%Q</span> [{{ plc.first_coil }}:{{ plc.coils_list|length|add:-1|add:plc.first_coil }}]: 
 		{% for coil in plc.coils_list %}
 			{% if coil %}
-				<span class="on">O</span>{% else %}<span class="off">X</span>{% endif %}<sub>{{ plc.first_coil|add:forloop.counter0 }}</sub>
+				<span class="on">1</span>{% else %}<span class="off">0</span>{% endif %}<sub>{{ plc.first_coil|add:forloop.counter0 }}</sub>
 		{% endfor %}
 		</span><br>
 	{% endif %}
 	{% if plc.discrete_inputs_list %}
 		<span class="row">Discrete inputs <span class="variable">%I</span> [{{ plc.first_discrete_input }}:{{ plc.discrete_inputs_list|length|add:-1|add:plc.first_discrete_input }}]:
 		{% for discrete_input in plc.discrete_inputs_list %}
-			{% if discrete_input %}<span class="on">O</span>{% else %}<span class="off">X</span>{% endif %}<sub>{{ plc.first_discrete_input|add:forloop.counter0 }}</sub>
+			{% if discrete_input %}<span class="on">1</span>{% else %}<span class="off">0</span>{% endif %}<sub>{{ plc.first_discrete_input|add:forloop.counter0 }}</sub>
 		{% endfor %}
 		</span><br>
 	{% endif %}
