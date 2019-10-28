@@ -1,4 +1,4 @@
-# plc_web_ui
+# plc-web-ui
 User interface website for PLC with Modbus protocol.
 
 Run command:
